@@ -8,6 +8,7 @@ router = APIRouter()
 
 @router.post("/", status_code=201, response_model=VesselPosition)
 def create_vessel_position(vessel_position: VesselPosition) -> VesselPosition:
+
     vessel_position_entry = VesselPosition(
         vessel_id=vessel_position.vessel_id,
         latitude=vessel_position.latitude,
