@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel, validator
 
 from app.exceptions import InvalidLatitude, InvalidLongitude
@@ -7,7 +9,13 @@ class VesselPosition(BaseModel):
     vessel_id: int
     latitude: float
     longitude: float
-    position_time: str
+    position_time: datetime
+
+    class Config:
+        json_encoders = {
+            # custom output conversion for datetime
+            datetime: lambda v: v.strftime("%Y-%m-%d %H:%M:%S.%f")
+        }
 
     @validator("latitude", pre=True)
     def valid_latitude(cls, latitude: float) -> float:

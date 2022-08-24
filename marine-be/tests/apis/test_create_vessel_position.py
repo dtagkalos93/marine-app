@@ -21,7 +21,6 @@ def test_vessel_position_have_been_added(client: TestClient) -> None:
     }
 
     client.post("/vessel-position/", json=vessel_position)
-
     assert len(VESSEL_POSITIONS) == 1
     assert VESSEL_POSITIONS[0] == VesselPosition(**vessel_position)
 
