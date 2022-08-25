@@ -26,7 +26,5 @@ class VesselPosition(BaseModel):
     @validator("longitude", pre=True)
     def valid_longitude(cls, longitude: float) -> float:
         if not (-180.0 <= longitude <= 180.0):
-            raise InvalidLongitude(
-                "The longitude must be a number between -180 and 180."
-            )
+            raise InvalidLongitude("The longitude must be a number between -180 and 180.")
         return longitude
