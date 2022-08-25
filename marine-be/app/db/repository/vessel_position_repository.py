@@ -1,4 +1,5 @@
 from decimal import Decimal
+from typing import List
 
 from sqlalchemy.orm import Session
 
@@ -6,7 +7,9 @@ from app.models.vessel_position import VesselPosition as VesselPositionDB
 from app.schemas.vessel_position import VesselPosition as VesselPositionSchema
 
 
-def create_new_vessel_position(vessel_position: VesselPositionSchema, db: Session) -> VesselPositionDB:
+def create_new_vessel_position(
+    vessel_position: VesselPositionSchema, db: Session
+) -> VesselPositionDB:
     vessel_position_db = VesselPositionDB(
         vessel_id=vessel_position.vessel_id,
         latitude=Decimal(vessel_position.latitude),
@@ -17,3 +20,15 @@ def create_new_vessel_position(vessel_position: VesselPositionSchema, db: Sessio
     db.commit()
     db.refresh(vessel_position_db)
     return vessel_position_db
+
+
+def get_vessel_positions_by_vessel_id(
+    vessel_id: int, db: Session
+) -> List[VesselPositionDB]:
+    vessel_positions = (
+        next(db)
+        .query(VesselPositionDB)
+        .filter(VesselPositionDB.vessel_id == vessel_id)
+        .all()
+    )
+    return vessel_positions

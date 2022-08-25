@@ -13,7 +13,11 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str = os.getenv("POSTGRES_HOST", "localhost")
     POSTGRES_PORT: str = os.getenv("POSTGRES_PORT", "5432")
     POSTGRES_DB: Optional[str] = os.getenv("POSTGRES_DB")
-    DATABASE_URL = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+    DATABASE_URL = (
+        f"postgresql://{POSTGRES_USER}:"
+        f"{POSTGRES_PASSWORD}@{POSTGRES_HOST}:"
+        f"{POSTGRES_PORT}/{POSTGRES_DB}"
+    )
 
 
 settings = Settings()
