@@ -16,6 +16,7 @@ class VesselPosition(BaseModel):
             # custom output conversion for datetime
             datetime: lambda v: v.strftime("%Y-%m-%d %H:%M:%S.%f")
         }
+        orm_mode = True
 
     @validator("latitude", pre=True)
     def valid_latitude(cls, latitude: float) -> float:

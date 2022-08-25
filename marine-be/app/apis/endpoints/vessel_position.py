@@ -1,20 +1,16 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
-from app.data import VESSEL_POSITIONS
-from app.schemas.vessel_position import VesselPosition
+from app.db.repository.vessel_position_repository import \
+    create_new_vessel_position
+from app.db.session import get_db
+from app.models.vessel_position import VesselPosition as VesselPositionDB
+from app.schemas.vessel_position import VesselPosition as VesselPositionSchema
 
 router = APIRouter()
 
 
-@router.post("/", status_code=201, response_model=VesselPosition)
-def create_vessel_position(vessel_position: VesselPosition) -> VesselPosition:
-
-    vessel_position_entry = VesselPosition(
-        vessel_id=vessel_position.vessel_id,
-        latitude=vessel_position.latitude,
-        longitude=vessel_position.longitude,
-        position_time=vessel_position.position_time,
-    )
-    VESSEL_POSITIONS.append(vessel_position_entry.dict())
-
+@router.post("/", status_code=201, response_model=VesselPositionSchema)
+def create_vessel_position(vessel_position: VesselPositionSchema, db: Session = Depends(get_db)) -> VesselPositionDB:
+    vessel_position_entry = create_new_vessel_position(vessel_position, db)
     return vessel_position_entry
