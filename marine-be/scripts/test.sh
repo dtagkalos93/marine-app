@@ -5,4 +5,4 @@ docker-compose build
 docker-compose up -d db
 sleep 2
 alembic upgrade head
-pytest --cov=app --cov-report=html
+docker-compose run api pytest --cov=app --cov-report=html

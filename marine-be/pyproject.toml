@@ -44,3 +44,10 @@ exclude = '''
   | dist
 )/
 '''
+
+[tool.coverage.run]
+omit =[
+    "app/tests/*",
+    "*__init__*",
+    "app/db/*.py"
+]
