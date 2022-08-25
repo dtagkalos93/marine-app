@@ -8,6 +8,10 @@ authors = ["Dimitris Tagkalos <dtagkalos@gmail.com>"]
 python = "^3.8"
 fastapi = "^0.80.0"
 uvicorn = "^0.18.2"
+psycopg2-binary = "^2.9.3"
+alembic = "^1.8.1"
+SQLAlchemy = "^1.4.40"
+python-dotenv = "^0.20.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.6.0"
@@ -18,7 +22,25 @@ pytest = "^7.1.2"
 pytest-cov = "^3.0.0"
 isort = "^5.10.1"
 autoflake = "^1.4"
+sqlalchemy-stubs = "^0.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
