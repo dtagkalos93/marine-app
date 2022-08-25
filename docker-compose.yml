@@ -11,3 +11,15 @@ services:
       POSTGRES_USER: fastapi_admin
       POSTGRES_DB: marine
       POSTGRES_PASSWORD: fastapi_pass
+  api:
+    container_name: marine-backend
+    build: ./marine-be
+    env_file:
+      - ./marine-be/.fastapi-env
+    command: bash -c "uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - ./marine-be:/tmp
+    ports:
+      - "8002:8000"
+    depends_on:
+      - db
