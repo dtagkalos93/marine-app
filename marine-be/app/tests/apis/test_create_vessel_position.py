@@ -1,17 +1,8 @@
-import pytest
 from starlette.testclient import TestClient
 
 from app.db.repository.vessel_position_repository import \
     get_vessel_positions_by_vessel_id
-from app.db.session import get_db, override_get_db
-from app.main import app
-
-
-@pytest.fixture(scope="session")
-def client() -> TestClient:
-    app.dependency_overrides[get_db] = override_get_db
-    client = TestClient(app)
-    return client
+from app.db.session import override_get_db
 
 
 def test_vessel_position_have_been_added(client: TestClient) -> None:

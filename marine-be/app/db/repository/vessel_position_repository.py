@@ -32,3 +32,15 @@ def get_vessel_positions_by_vessel_id(
         .all()
     )
     return vessel_positions
+
+
+def get_multi_vessel_positions(
+    db: Session, skip: int = 0, limit: int = 100
+) -> List[VesselPositionDB]:
+    return (
+        db.query(VesselPositionDB)
+        .order_by(VesselPositionDB.position_time)
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
