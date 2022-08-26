@@ -23,3 +23,10 @@ services:
       - "8002:8000"
     depends_on:
       - db
+  frontend:
+    build: ./marine-fe
+    volumes:
+      - './marine-fe:/app'
+      - '/app/node_modules'
+    ports:
+      - 8080:8080
