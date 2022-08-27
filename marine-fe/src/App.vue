@@ -1,15 +1,20 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <v-app>
+    <v-main>
+      <DatatableComponent/>
+    </v-main>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>
+<script>
+import DatatableComponent from './components/DataTable';
+export default {
+  name: 'App',
+  components: {
+    DatatableComponent,
+  },
+  data: () => ({
+    //
+  }),
+};
+</script>
