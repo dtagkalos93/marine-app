@@ -44,3 +44,9 @@ def get_multi_vessel_positions(
         .limit(limit)
         .all()
     )
+
+
+def get_total_of_vessel_positions(
+    db: Session,
+) -> int:
+    return db.query(VesselPositionDB).count()

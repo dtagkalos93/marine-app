@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import List
 
 from pydantic import BaseModel, validator
 
@@ -31,3 +32,15 @@ class VesselPosition(BaseModel):
                 "The longitude must be a number between -180 and 180."
             )
         return longitude
+
+
+class VesselPositionResponse(BaseModel):
+    data: List[VesselPosition]
+    number_of_pages: int
+    total_vessel_position: int
+
+    class Config:
+        json_encoders = {
+            # custom output conversion for datetime
+            datetime: lambda v: v.strftime("%Y-%m-%d %H:%M:%S.%f")
+        }
