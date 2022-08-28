@@ -1,6 +1,7 @@
 from decimal import Decimal
-from typing import List
+from typing import List, Optional
 
+from sqlalchemy import desc
 from sqlalchemy.orm import Session
 
 from app.models.vessel_position import VesselPosition as VesselPositionDB
@@ -26,10 +27,7 @@ def get_vessel_positions_by_vessel_id(
     vessel_id: int, db: Session
 ) -> List[VesselPositionDB]:
     vessel_positions = (
-        next(db)
-        .query(VesselPositionDB)
-        .filter(VesselPositionDB.vessel_id == vessel_id)
-        .all()
+        db.query(VesselPositionDB).filter(VesselPositionDB.vessel_id == vessel_id).all()
     )
     return vessel_positions
 
@@ -50,3 +48,14 @@ def get_total_of_vessel_positions(
     db: Session,
 ) -> int:
     return db.query(VesselPositionDB).count()
+
+
+def get_latest_vessel_position_by_vessel_id(
+    db, vessel_id
+) -> Optional[VesselPositionDB]:
+    return (
+        db.query(VesselPositionDB)
+        .filter(VesselPositionDB.vessel_id == vessel_id)
+        .order_by(desc(VesselPositionDB.position_time))
+        .first()
+    )

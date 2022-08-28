@@ -21,7 +21,7 @@ def test_should_return_first_element_if_limit_is_one(client: TestClient):
             "position_time": "2018-01-02 15:52:56.000000",
         },
         {
-            "vessel_id": 23,
+            "vessel_id": 24,
             "latitude": 15.432443,
             "longitude": -60.431343,
             "position_time": "2018-01-02 15:52:56.000000",
@@ -48,7 +48,7 @@ def test_should_return_second_element_if_limit_is_one(client: TestClient):
             "position_time": "2018-01-02 15:52:56.000000",
         },
         {
-            "vessel_id": 23,
+            "vessel_id": 24,
             "latitude": 15.432443,
             "longitude": -60.431343,
             "position_time": "2018-01-03 15:52:56.000000",
@@ -75,7 +75,7 @@ def test_should_return_all_elements_with_default_offset(client: TestClient):
             "position_time": "2018-01-02 15:52:56.000000",
         },
         {
-            "vessel_id": 23,
+            "vessel_id": 24,
             "latitude": 15.432443,
             "longitude": -60.431343,
             "position_time": "2018-01-03 15:52:56.000000",

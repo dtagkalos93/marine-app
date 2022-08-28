@@ -4,3 +4,7 @@ class InvalidLatitude(Exception):
 
 class InvalidLongitude(Exception):
     pass
+
+
+class InvalidTravel(Exception):
+    pass

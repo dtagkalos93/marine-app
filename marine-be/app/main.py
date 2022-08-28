@@ -4,7 +4,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from app.apis.api import api_router
-from app.exceptions import InvalidLatitude, InvalidLongitude
+from app.exceptions import InvalidLatitude, InvalidLongitude, InvalidTravel
 
 app = FastAPI()
 
@@ -18,12 +18,8 @@ app.add_middleware(
 )
 
 
-@app.get("/")
-def home():
-    return "Hello, World!"
-
-
 @app.exception_handler(InvalidLatitude)
 @app.exception_handler(InvalidLongitude)
+@app.exception_handler(InvalidTravel)
 def validation_exception_handler(request: Request, exc: Exception) -> JSONResponse:
     return JSONResponse({"detail": str(exc)}, status_code=400)
