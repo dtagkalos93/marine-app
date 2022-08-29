@@ -13,6 +13,7 @@ alembic = "^1.8.1"
 SQLAlchemy = "^1.4.40"
 python-dotenv = "^0.20.0"
 geopy = "^2.2.0"
+pandas = "^1.4.3"
 
 [tool.poetry.dev-dependencies]
 black = "^22.6.0"
