@@ -20,7 +20,7 @@ def valid_travel(db: Session, new_vessel_position: VesselPositionSchema) -> bool
     """
     This function is responsibly to valid that the new coordinates is not
     impossible travel.We assume that a vessel can travel up to 0.5 kilometers
-    per minute, so we doproper calculations and validation. If that is correct
+    per minute, so we make proper calculations and validation. If that is correct
     will return True else it will an impossible travel, so it will return False.
     :param db:
     :param new_vessel_position:
